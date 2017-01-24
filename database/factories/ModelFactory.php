@@ -26,13 +26,14 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Task::class, function (Faker\Generator $faker) {
 
     return [
-        'body' => $faker->paragraph
+        'body'         => $faker->sentence,
+        'task_list_id' => rand(1,4)
     ];
 });
 
 $factory->define(App\TaskList::class, function (Faker\Generator $faker) {
 
     return [
-        'title' => $faker->name
+        'title' => $faker->sentence
     ];
 });
