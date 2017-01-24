@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Trillo</title>
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
+        <link rel="stylesheet" type="text/css" href="/css/app.css">
+        <link rel="stylesheet" type="text/css" href="/css/board.css">
         <style>
       
             .list-group > li > p{
@@ -26,29 +26,57 @@
     <body>
 
 
-        <div class="container">
-            <h1>Trillo</h1>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand-centered">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <div class="navbar-brand navbar-brand-centered">Trillo</div>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-brand-centered">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>               
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="container" id="board">
+
             <boards></boards>
         </div>
 
         <template id="tasks-template">
             
-                <ul class="list-group">
-                    <li class="list-group-item" v-for="task in list">
-                        <p>
-                            @{{ task.body }}
-                        </p>
-                        <div class="btn-group" role="group">
-                            <button 
-                                type="button" 
-                                class="btn btn-default"
-                                @click="deleteTask(task)"
-                            >
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </li>
-                </ul>
+            <ul class="list-group">
+                <li class="list-group-item" v-for="task in list">
+                    <p>
+                        @{{ task.body }}
+                    </p>
+                    <div class="btn-group" role="group">
+                        <button 
+                            type="button" 
+                            class="btn btn-default"
+                            @click="deleteTask(task)"
+                        >
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </li>
+            </ul>
             
         </template>
 
@@ -56,8 +84,17 @@
             <div>
                 <div v-for="list in lists">
                     <div class="col-sm-12 col-md-3">
-                        <h3>@{{ list.title }}</h3>
-                        <tasks :list="list.tasks"></tasks>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="list-title">
+                                    <p @click="editTitle(list)">
+                                        @{{ list.title }}
+                                    </p>
+                                    <span class="glyphicon glyphicon-option-horizontal list-title-edit" aria-hidden="true"></span>
+                                </div>
+                                <tasks :list="list.tasks"></tasks>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

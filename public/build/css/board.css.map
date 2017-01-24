@@ -1,0 +1,1 @@
+{"version":3,"sources":["board.scss"],"names":[],"mappings":"AAAA;EACC,0BAA0B;CAC1B","file":"board.css","sourcesContent":["body{\r\n\tbackground-color: #2ecc71;\r\n}"]}

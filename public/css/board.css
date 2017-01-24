@@ -1,0 +1,48 @@
+.list-title {
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.list-title p {
+  cursor: pointer;
+  float: left;
+  margin-right: 25px;
+}
+
+.list-title .list-title-edit {
+  width: 25px;
+  position: absolute;
+  right: 0px;
+  padding: 5px;
+  border-radius: 2.5px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.list-title .list-title-edit:hover {
+  background-color: #ccc;
+}
+
+.panel-body {
+  padding: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .navbar-brand-centered {
+    position: absolute;
+    left: 50%;
+    display: block;
+    width: 160px;
+    text-align: center;
+    background-color: #eee;
+    cursor: pointer;
+  }
+  .navbar > .container .navbar-brand-centered,
+  .navbar > .container-fluid .navbar-brand-centered {
+    margin-left: -80px;
+  }
+}
+
+/*# sourceMappingURL=board.css.map */

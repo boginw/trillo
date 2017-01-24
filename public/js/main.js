@@ -39,6 +39,9 @@ Vue.component('list', {
 		},
 		deleteTask: function(task){
 			this.lists.splice(this.lists.indexOf(task),1);
+		},
+		editTitle: function(list){
+			console.log(list);
 		}
 	}
 });
@@ -54,7 +57,7 @@ Vue.component('tasks', {
 });
 
 new Vue({
-	el: ".container",
+	el: "#board",
 	data: {
 
 	}

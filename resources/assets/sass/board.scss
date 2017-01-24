@@ -1,0 +1,46 @@
+$list-edit-width: 25px;
+
+.list-title{
+	font-weight: bold;
+	position: relative;
+	overflow: hidden;
+    word-wrap: break-word;
+    & p{
+    	cursor:pointer;
+ 		float: left;
+    	margin-right: $list-edit-width;
+    }
+    & .list-title-edit{
+		width: $list-edit-width;
+    	position: absolute;
+    	right: 0px;
+    	padding: $list-edit-width / 5;
+    	border-radius: $list-edit-width / 10;
+    	height: $list-edit-width;
+    	cursor:pointer;
+    	&:hover{
+    		background-color: #ccc;
+    	}
+    }
+}
+
+
+.panel-body{
+	padding: 10px
+}
+
+@media screen and (min-width:768px){
+    .navbar-brand-centered {
+        position: absolute;
+        left: 50%;
+        display: block;
+        width: 160px;
+        text-align: center;
+        background-color: #eee;
+        cursor:pointer;
+    }
+    .navbar>.container .navbar-brand-centered, 
+    		.navbar>.container-fluid .navbar-brand-centered {
+        margin-left: -80px;
+    }
+}
