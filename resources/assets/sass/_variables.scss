@@ -26,6 +26,8 @@ $text-color: #636b6f;
 
 // Navbar
 $navbar-default-bg: $brand-secondary;
+$navbar-default-brand-color: darken(#FFF, 5%);
+$navbar-default-brand-hover-color: #FFF;
 
 // Buttons
 $btn-default-color: $text-color;
@@ -37,3 +39,9 @@ $input-color-placeholder: lighten($text-color, 30%);
 
 // Panels
 $panel-default-heading-bg: #ecf0f1;
+
+
+$navbar-default-color: $navbar-default-brand-color;
+$navbar-default-link-color: $navbar-default-brand-color;
+$navbar-default-link-hover-color: $navbar-default-brand-hover-color;
+$navbar-height: 40px;

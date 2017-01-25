@@ -28,20 +28,19 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-brand-centered">
                     <ul class="nav navbar-nav">
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Boards</a></li>
+                        <li><a href="#">Search</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>               
+                        <li><a href="#">New</a></li>
+                        <li><a href="#">Me</a></li>
+                        <li><a href="#">Help</a></li>               
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
         <div class="container" id="board">
-
+            <p class="board-title">Trillo todo list</p>
             <boards></boards>
         </div>
 

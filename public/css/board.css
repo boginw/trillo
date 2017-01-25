@@ -166,6 +166,27 @@
   border-radius: 5px;
 }
 
+.board-title {
+  cursor: default;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 30px;
+  color: #FFF;
+  padding-left: 5px;
+}
+
+.navbar {
+  margin-bottom: 5px;
+}
+
+.navbar a {
+  color: #FFF;
+}
+
+.container {
+  width: 100%;
+}
+
 @media screen and (min-width: 768px) {
   .navbar-brand-centered {
     position: absolute;
@@ -173,8 +194,10 @@
     display: block;
     width: 160px;
     text-align: center;
-    background-color: #eee;
     cursor: pointer;
+  }
+  .navbar-brand-centered:hover {
+    color: #FFF;
   }
   .navbar > .container .navbar-brand-centered,
   .navbar > .container-fluid .navbar-brand-centered {
