@@ -164,6 +164,14 @@ $default-padding: 10px;
 	}
 }
 
+.ghost-task{
+	background-color: #bdc3c7;;
+	display: block;
+	width: 100%;
+	height: 50px;
+	border-radius: 5px;
+}
+
 @media screen and (min-width:768px){
     .navbar-brand-centered {
         position: absolute;

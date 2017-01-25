@@ -30,6 +30,12 @@ Route::put('/api/tasks', function(){
 	return $id;
 });
 
+Route::patch('/api/tasks/{id}/move', function($id){
+	return !!DB::table('tasks')
+            ->where('id', $id)
+            ->update(['task_list_id' => Request::input('task_list_id')]) ? "true" : "false";
+});
+
 Route::get('/', function () {
 
     return view('welcome');

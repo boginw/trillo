@@ -138,10 +138,23 @@ Vue.component('list', {
 
 Vue.component('tasks', {
 	template: "#tasks-template",
-	props: ["list"],
+	props: ["list","id"],
 	methods: {
 		deleteTask: function(task){
 			this.list.splice(this.list.indexOf(task),1);
+		},
+		movedTask(evt){
+			var id = undefined;
+			if(evt.added != undefined){
+				id = evt.added.element.id;
+				this.$http.patch('api/tasks/'+id+'/move', {task_list_id: this.id}).then((ret) => {
+					console.log("moved");
+				});
+			}else if(evt.moved != undefined){
+				id = evt.moved.element.id;
+			}else{
+				return;
+			}
 		}
 	}
 });

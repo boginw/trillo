@@ -46,24 +46,36 @@
         </div>
 
         <template id="tasks-template">
-            
             <ul class="list-group">
-                <li class="task" v-for="task in list">
-                    <p class="task-title">
-                        @{{ task.body }}
-                    </p>
-                    <span class="glyphicon glyphicon-pencil task-edit" aria-hidden="true"></span>
+                <draggable 
+                        :list="list" 
+                        :options="{
+                            element:'li', 
+                            group:'tasks',
+                            sort:true,
+                            ghostClass: 'ghost-task',
+                            animation:150
+                        }" 
+                        style="min-height:25px"
+                        @change="movedTask($event)"
+                > 
+                    <li class="task" v-for="task in list">
+                        <p class="task-title">
+                            @{{ task.body }}
+                        </p>
+                        <span class="glyphicon glyphicon-pencil task-edit" aria-hidden="true"></span>
 
-                    <!--<div class="btn-group" role="group">
-                        <button 
-                            type="button" 
-                            class="btn btn-default"
-                            @click="deleteTask(task)"
-                        >
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </button>
-                    </div>-->
-                </li>
+                        <!--<div class="btn-group" role="group">
+                            <button 
+                                type="button" 
+                                class="btn btn-default"
+                                @click="deleteTask(task)"
+                            >
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>-->
+                    </li>
+                </draggable>
             </ul>
             
         </template>
@@ -92,7 +104,7 @@
 
                                     <span class="glyphicon glyphicon-option-horizontal list-title-edit" aria-hidden="true"></span>
                                 </div>
-                                <tasks :list="list.tasks"></tasks>
+                                <tasks :list="list.tasks" :id="list.id"></tasks>
 
 
                             </div>
@@ -145,6 +157,8 @@
 
         <script src="https://unpkg.com/vue/dist/vue.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.js"></script>
+        <script src="//cdn.jsdelivr.net/sortable/latest/Sortable.min.js"></script>
+        <script type="text/javascript" src="/js/vuedraggable.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
     </body>
 </html>
