@@ -1,14 +1,45 @@
+@mixin calc($property, $expression) {
+	#{$property}: -moz-calc(#{$expression});
+	#{$property}: -webkit-calc(#{$expression});
+	#{$property}: calc(#{$expression});
+}
+
+// Variables
+@import "variables";
+
 $list-edit-width: 25px;
+$default-padding: 10px;
+
 
 .list-title{
 	font-weight: bold;
 	position: relative;
 	overflow: hidden;
     word-wrap: break-word;
-    & p{
-    	cursor:pointer;
+    & p, .textareaContainer{
  		float: left;
     	margin-right: $list-edit-width;
+    }
+    & p{
+    	cursor:pointer;
+    }
+    & textarea{
+    	margin: 0; 
+    	padding: 0px 0px 5px 0px; 
+    	overflow: hidden;
+    	width:100%;
+    	height:$list-edit-width;
+	    outline:none;
+	    border: 0 none #FFF;
+	    resize: none;
+	    border-radius: 5px;
+    	&:active{
+	    	outline:none;
+	    	border: 0 none #FFF;
+    	}
+    }
+    & .textareaContainer{
+    	@include calc( width, '100% - #{$list-edit-width}');
     }
     & .list-title-edit{
 		width: $list-edit-width;
@@ -22,11 +53,45 @@ $list-edit-width: 25px;
     		background-color: #ccc;
     	}
     }
+
 }
 
+.fade-transition{
+    transition: all 0.5s ease;
+}
+
+.fade-enter, .fade-leave{
+    opacity : 0;
+}
+
+.panel{
+	background-color: $panel-default-heading-bg;
+}
 
 .panel-body{
-	padding: 10px
+	padding: $default-padding $default-padding 0px $default-padding;
+}
+
+      
+.list-group > li > p{
+    width: 100% !important;
+    padding-right: 40px !important;
+}
+
+.list-group > li > .btn-group{
+    position: absolute !important;
+    right: 0px !important;
+    top: 0px !important;
+}
+
+.newTaskContainer{
+	padding: $default-padding;
+	&:hover{
+		cursor: pointer;
+		background-color: #bdc3c7;
+		text-decoration: underline;
+		color: darken(#7f8c8d, 50%);
+	}
 }
 
 @media screen and (min-width:768px){

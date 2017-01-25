@@ -17,6 +17,7 @@ elixir(mix => {
     mix.sass('app.scss')
        .sass('board.scss')
        .webpack('app.js')
+       .webpack('main.js')
        .copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/*','public/fonts/')
        .browserSync({
        		proxy : 'trillo.test',

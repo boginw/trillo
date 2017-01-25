@@ -3,25 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>Trillo</title>
         <link rel="stylesheet" type="text/css" href="/css/app.css">
         <link rel="stylesheet" type="text/css" href="/css/board.css">
-        <style>
-      
-            .list-group > li > p{
-                width: 100% !important;
-                padding-right: 40px !important;
-            }
-
-            .list-group > li > .btn-group{
-                position: absolute !important;
-                right: 0px !important;
-                top: 0px !important;
-            }
-
-        </style>
     </head>
     <body>
 
@@ -82,17 +68,34 @@
 
         <template id="list-template">
             <div>
-                <div v-for="list in lists">
+                <div v-for="list, idx in lists">
                     <div class="col-sm-12 col-md-3">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="list-title">
-                                    <p @click="editTitle(list)">
+                                    <p v-show="!lists[idx].edit" @click="toggleEditTitle(idx,list)">
                                         @{{ list.title }}
                                     </p>
+                                    <div class="textareaContainer"
+                                        v-show="lists[idx].edit"
+                                    >
+                                        <textarea  
+                                            ref="editTitleInput"
+                                            @keyup="autoHeight($event.currentTarget)"
+                                            @blur="updateTitle(list)"
+                                            @keyup.enter="blurTextarea($event)"
+                                            v-model="list.title"
+                                        ></textarea>
+                                    </div>
+
                                     <span class="glyphicon glyphicon-option-horizontal list-title-edit" aria-hidden="true"></span>
                                 </div>
                                 <tasks :list="list.tasks"></tasks>
+
+
+                            </div>
+                            <div class="newTaskContainer">
+                                Add new task...
                             </div>
                         </div>
                     </div>

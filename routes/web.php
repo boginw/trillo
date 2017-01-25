@@ -15,6 +15,8 @@ Route::get('/api/lists', function(){
 	return App\TaskList::with('tasks')->get();
 });
 
+Route::patch('/api/lists/{id}', 'TaskListController@update');
+
 Route::get('/api/tasks', function(){
 	return App\Task::latest()->get();
 });
