@@ -48,11 +48,13 @@
         <template id="tasks-template">
             
             <ul class="list-group">
-                <li class="list-group-item" v-for="task in list">
-                    <p>
+                <li class="task" v-for="task in list">
+                    <p class="task-title">
                         @{{ task.body }}
                     </p>
-                    <div class="btn-group" role="group">
+                    <span class="glyphicon glyphicon-pencil task-edit" aria-hidden="true"></span>
+
+                    <!--<div class="btn-group" role="group">
                         <button 
                             type="button" 
                             class="btn btn-default"
@@ -60,7 +62,7 @@
                         >
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button>
-                    </div>
+                    </div>-->
                 </li>
             </ul>
             
