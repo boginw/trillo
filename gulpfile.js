@@ -24,7 +24,8 @@ elixir(mix => {
        		files : [
        			'public/css/board.css',
        			'public/index.html',
-       			'resources/views/welcome.blade.php'
+                        'resources/views/welcome.blade.php',
+       			'resources/assets/js/main.js'
        		]
        });
 });

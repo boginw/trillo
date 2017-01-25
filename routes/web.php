@@ -21,6 +21,15 @@ Route::get('/api/tasks', function(){
 	return App\Task::latest()->get();
 });
 
+Route::put('/api/tasks', function(){
+	$id = DB::table('tasks')
+		->insertGetId([
+				"body" => Request::input("body"),
+				"task_list_id" => Request::input("task_list_id")
+			]);
+	return $id;
+});
+
 Route::get('/', function () {
 
     return view('welcome');

@@ -28,6 +28,7 @@ Vue.component('list', {
 		return {
 			lists: [],
 			tempEdit: "",
+			tempTask: ""
 		}
 	},
 	created: function(){
@@ -39,9 +40,11 @@ Vue.component('list', {
 
 			resource.get({ id : this.list_id }).then((lists) => {
 
+				// insert new fields
 				for (var i = 0; i < lists.data.length; i++) {
-					lists.data[i]['edit'] = false;
-					lists.data[i]['title'] = lists.data[i]['title'].trim();
+					lists.data[i]['edit']    = false;
+					lists.data[i]['newTask'] = false;
+					lists.data[i]['title']   = lists.data[i]['title'].trim();
 				}
 
 				this.lists = lists.data;
@@ -70,6 +73,11 @@ Vue.component('list', {
 
 			list.title = list.title.trim();
 
+			if(list.title == ""){
+				list.title = this.tempEdit;
+				return;
+			}
+
 			if(this.tempEdit != list.title){
 				this.$http.patch('api/lists/'+list.id, {title: list.title}).then((ret) => {
 					this.tempEdit = list.title
@@ -79,6 +87,51 @@ Vue.component('list', {
 		blurTextarea(e){
 			e.preventDefault();
 			e.target.blur();
+		},
+		cancelNewTask(list){
+			list.newTask = false;
+		},
+		newTask(idx,list){
+			list.newTask = true;
+
+			// Focus input field
+        	setTimeout(()=>{
+        		this.$refs['newTaskInput'][idx].focus();
+        		this.$refs['newTaskInput'][idx].select();
+            	this.autoHeight(this.$refs['newTaskInput'][idx]);
+        	},1);
+		},
+		submitTask(list){
+			this.tempTask = this.tempTask.trim();
+
+			var body = this.tempTask;
+			
+
+			if(body != ""){
+
+
+				/*this.lists[this.lists.indexOf(list)].push({
+					body: body,
+					completed: 0,
+					created_at: "",
+					task_list_id: list.id,
+					updated_at: "",
+					id: 0
+				});*/
+
+				list.tasks.push({
+					body: body,
+					completed: 0,
+					created_at: "",
+					task_list_id: list.id,
+					updated_at: "",
+					id: 0
+				});
+
+				this.$http.put('api/tasks', {body: body, task_list_id: list.id}).then((ret) => {
+					list.tasks[list.tasks.length-1].id = ret.body;
+				});
+			}
 		}
 	}
 });

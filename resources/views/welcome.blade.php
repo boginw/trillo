@@ -79,7 +79,7 @@
                                         @{{ list.title }}
                                     </p>
                                     <div class="textareaContainer"
-                                        v-show="lists[idx].edit"
+                                        v-show="list.edit"
                                     >
                                         <textarea  
                                             ref="editTitleInput"
@@ -97,7 +97,39 @@
 
                             </div>
                             <div class="newTaskContainer">
-                                Add new task...
+                                <div class="newTask"
+                                    @blur="cancelNewTask(list)"
+                                    v-show="list.newTask"
+                                >
+                                    <div class="task">
+                                        <div class="textareaContainer">
+                                            <textarea  
+                                                ref="newTaskInput"
+                                                @keyup.enter="submitTask(list)"
+                                                @keyup="autoHeight($event.currentTarget)"
+                                                v-model="tempTask"
+                                            ></textarea>
+                                        </div>  
+                                    </div>
+
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-success"
+                                            @click="submitTask(list)"
+                                        >
+                                            Add
+                                        </button>
+                                    </div>
+                                    <span class="glyphicon glyphicon-remove newTask_remove" aria-hidden="true"
+                                        @click="cancelNewTask(list)"
+                                    ></span>
+                                </div>
+
+                                <div class="newTaskPlaceholder"
+                                    v-show="!list.newTask"
+                                    @click="newTask(idx,list)"
+                                >
+                                    Add new task...
+                                </div>
                             </div>
                         </div>
                     </div>

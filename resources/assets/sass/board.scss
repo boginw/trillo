@@ -113,6 +113,22 @@ $default-padding: 10px;
     		background-color: #ccc
     	}
 	}
+
+	& textarea{
+    	margin: 0; 
+    	padding: 0px 0px 5px 0px; 
+    	overflow: hidden;
+    	width:100%;
+    	height:$list-edit-width;
+	    outline:none;
+	    border: 0 none #FFF;
+	    resize: none;
+	    border-radius: 5px;
+    	&:active{
+	    	outline:none;
+	    	border: 0 none #FFF;
+    	}
+    }
 }
 
 .list-group > li > .btn-group{
@@ -122,12 +138,29 @@ $default-padding: 10px;
 }
 
 .newTaskContainer{
-	padding: $default-padding;
-	&:hover{
-		cursor: pointer;
-		background-color: #bdc3c7;
-		text-decoration: underline;
-		color: darken(#7f8c8d, 50%);
+
+	& .newTask{
+		padding: $default-padding;
+	}
+
+	& .newTaskPlaceholder{
+		padding: $default-padding;
+
+		&:hover{
+			cursor: pointer;
+			background-color: #bdc3c7;
+			text-decoration: underline;
+			color: darken(#7f8c8d, 50%);
+		}
+	}
+	& .newTask_remove{
+		font-size: 20px;
+    	vertical-align: middle;
+    	color: #ababab;
+    	cursor:pointer;
+    	&:hover{
+    		color:initial;
+    	}
 	}
 }
 
