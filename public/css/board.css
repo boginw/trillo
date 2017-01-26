@@ -12,6 +12,10 @@
 
 .list-title p {
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .list-title textarea {
@@ -90,6 +94,10 @@
   font-size: 11px;
   font-weight: 500;
   margin-right: 25px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .task:hover .task-edit {
@@ -230,6 +238,10 @@
 
 .modal-content .modal_title p {
   margin: 0px 0px 0px 25px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .modal-content .actions {

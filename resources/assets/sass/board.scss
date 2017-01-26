@@ -22,6 +22,7 @@ $default-padding: 10px;
     }
     & p{
     	cursor:pointer;
+        user-select: none;
     }
     & textarea{
     	margin: 0; 
@@ -93,6 +94,7 @@ $default-padding: 10px;
 	    font-size: 11px;
 	    font-weight: 500;
     	margin-right: $list-edit-width;
+        user-select: none;
 	}
 	      
 	&:hover .task-edit{
@@ -228,6 +230,7 @@ $default-padding: 10px;
 
     & .modal_title p{
         margin: 0px 0px 0px 25px;
+        user-select: none;
     }
 
     & .actions{

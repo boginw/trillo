@@ -16,7 +16,6 @@ require('laravel-elixir-vue-2');
 elixir(mix => {
     mix.sass('app.scss')
        .sass('board.scss')
-       .webpack('app.js')
        .webpack('main.js')
        .copy('./node_modules/bootstrap-sass/assets/fonts/bootstrap/*','public/fonts/')
        .copy('./node_modules/vuedraggable/dist/vuedraggable.js','public/js/vuedraggable.js')
