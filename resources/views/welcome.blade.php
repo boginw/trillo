@@ -42,6 +42,7 @@
         <div class="container" id="board">
             <p class="board-title">Trillo todo list</p>
             <boards></boards>
+            <modal></modal>
         </div>
 
         <template id="tasks-template">
@@ -58,21 +59,14 @@
                         style="min-height:25px"
                         @change="movedTask($event)"
                 > 
-                    <li class="task" v-for="task in list">
+                    <li class="task" 
+                        v-for="task in list" 
+                        @click="openTask(task)"
+                    >
                         <p class="task-title">
                             @{{ task.body }}
                         </p>
                         <span class="glyphicon glyphicon-pencil task-edit" aria-hidden="true"></span>
-
-                        <!--<div class="btn-group" role="group">
-                            <button 
-                                type="button" 
-                                class="btn btn-default"
-                                @click="deleteTask(task)"
-                            >
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </button>
-                        </div>-->
                     </li>
                 </draggable>
             </ul>
@@ -103,7 +97,7 @@
 
                                     <span class="glyphicon glyphicon-option-horizontal list-title-edit" aria-hidden="true"></span>
                                 </div>
-                                <tasks :list="list.tasks" :id="list.id"></tasks>
+                                <tasks :list="list.tasks" :index="idx" :id="list.id"></tasks>
 
 
                             </div>
@@ -153,6 +147,76 @@
                 <list></list>
             </div>
         </template>
+
+        <template id="modal-template">
+            <!-- The Modal -->
+            <div class="task_modal" v-show="show" @keyup:esc="closeModal()">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close" @click="closeModal()">&times;</span>
+
+                    <div class="modal_title">
+                        <div class="modal_icon">
+                            <span class="glyphicon glyphicon-th-list"></span>
+                        </div>
+                        <p class="title">@{{ openTask.body }}</p>
+
+                        <p>In list <a href="#">@{{ taskList.title }}</a></p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-9 left">
+                            <div class="content">
+                                <p><br />This should be description</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-3 right">
+                            <p>Add</p>
+                            <div class="btn-group-vertical actions" role="group" aria-label="...">
+                                <button type="button" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-user"></i> Members
+                                </button>
+                                <button type="button" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-tag"></i> Labels
+                                </button>
+                                <button type="button" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-check"></i> Checklist
+                                </button>
+                                <button type="button" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-time"></i> Due Date
+                                </button>
+                                <button type="button" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-paperclip"></i> Attachment
+                                </button>
+                            </div>
+
+                            <p>Actions</p>
+                            <div class="btn-group-vertical actions" role="group" aria-label="...">
+                                <button type="button" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-arrow-right"></i> Move
+                                </button>
+                                <button type="button" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-copy"></i> Copy
+                                </button>
+                                <button type="button" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-eye-open"></i> Subscribe
+                                </button>
+                                <button type="button" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-trash"></i> Archive
+                                </button>
+                            </div>
+
+                            <a href="#">
+                                Share task and more...
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </template>
+
 
         <script src="https://unpkg.com/vue/dist/vue.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.js"></script>

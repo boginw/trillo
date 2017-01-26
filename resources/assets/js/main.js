@@ -1,24 +1,4 @@
 
-Vue.component('boards', {
-	template: '#boards-template',
-	data: function(){
-		return {
-			list: []
-		}
-	},
-	created(){
-		this.fetchBoards();
-	},
-	methods:{
-		fetchBoards(){
-			return {};
-		},
-		deleteBoard(board){
-			this.list.splice(this.list.indexOf(board),1);
-		}
-	}
-});
-
 
 
 Vue.component('list', {
@@ -105,19 +85,8 @@ Vue.component('list', {
 			this.tempTask = this.tempTask.trim();
 
 			var body = this.tempTask;
-			
 
 			if(body != ""){
-
-
-				/*this.lists[this.lists.indexOf(list)].push({
-					body: body,
-					completed: 0,
-					created_at: "",
-					task_list_id: list.id,
-					updated_at: "",
-					id: 0
-				});*/
 
 				list.tasks.push({
 					body: body,
@@ -138,7 +107,7 @@ Vue.component('list', {
 
 Vue.component('tasks', {
 	template: "#tasks-template",
-	props: ["list","id"],
+	props: ["list","id","index"],
 	methods: {
 		deleteTask: function(task){
 			this.list.splice(this.list.indexOf(task),1);
@@ -155,13 +124,67 @@ Vue.component('tasks', {
 			}else{
 				return;
 			}
+		},
+		openTask(task){
+			Event.$emit("modal_task", task, this.$parent._data.lists[this.index]);
 		}
 	}
 });
 
-new Vue({
-	el: "#board",
-	data: {
+Vue.component('modal', {
+	template: "#modal-template",
+	data: function(){
+		return {
+			show: false,
+			openTask: false,
+			modal_body: "test",
+			taskList: false
+		};
+	},
+	created(){
+		var vm = this;
+		Event.$on('modal_task', function(task, taskList){
+			vm.openModal(task,taskList);
+		});
+	},
+	methods: {
+		fetchTaskInfo(){
 
+		},
+		openModal(task,taskList){
+			this.show       = true;
+			this.openTask   = task;
+			this.taskList   = taskList
+		},
+		closeModal(){
+			this.show = false;
+		}
 	}
+});
+
+Vue.component('boards', {
+	template: '#boards-template',
+	data: function(){
+		return {
+			list: []
+		}
+	},
+	created(){
+		this.fetchBoards();
+	},
+	methods:{
+		fetchBoards(){
+			return {};
+		},
+		deleteBoard(board){
+			this.list.splice(this.list.indexOf(board),1);
+		}
+	}
+});
+
+let Event = new Vue({});
+window.Event = Event;
+
+let app = new Vue({
+	el: "#board"
 });
