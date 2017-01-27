@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div v-for="list, idx in lists">
-            <div class="col-sm-12 col-md-3">
+            <div class="task-list" v-for="list, idx in lists">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="list-title">
@@ -63,6 +62,14 @@
                     </div>
                 </div>
             </div>
+
+        <div class="newList">
+        	<div class="task-list">
+        		<div class="panel-body">
+        			Add new list
+        			
+        		</div>
+        	</div>
         </div>
     </div>
 </template>

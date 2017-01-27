@@ -18,6 +18,11 @@
             >
                 <p class="task-title">
                     {{ task.body }}
+                    <span class="task-tags">
+                        <span class="label label-default"><i class="glyphicon glyphicon-check"></i> 5/7</span>
+                        <i class="glyphicon glyphicon-align-left"></i>
+                        
+                    </span>
                 </p>
                 <span class="glyphicon glyphicon-pencil task-edit" aria-hidden="true"></span>
             </li>

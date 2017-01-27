@@ -62,12 +62,32 @@
   opacity: 0;
 }
 
-.panel {
-  background-color: #ecf0f1;
+.task-list {
+  margin-left: 16px;
+  max-width: 300px;
+  width: 100%;
+  vertical-align: top;
 }
 
-.panel-body {
-  padding: 10px 10px 0px 10px;
+.newList {
+  cursor: pointer;
+  max-width: 300px;
+  width: 100%;
+}
+
+.newList .task-list {
+  background-color: rgba(0, 0, 0, 0.12);
+  -webkit-transition: 150ms;
+  transition: 150ms;
+}
+
+.newList .task-list .panel-body {
+  padding: 10px;
+  color: #DDD;
+}
+
+.newList .task-list:hover {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .task {
@@ -98,6 +118,11 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  white-space: initial;
+}
+
+.task .task-title .task-tags {
+  display: block;
 }
 
 .task:hover .task-edit {
@@ -144,12 +169,51 @@
   top: 0px !important;
 }
 
+.panel {
+  /*max-height: calc(100vh - 182px);*/
+  background-color: #ecf0f1;
+  margin-bottom: 0px;
+}
+
+.panel .panel-body {
+  padding: 10px 10px 0px 10px;
+}
+
+.panel ul.list-group {
+  overflow-y: auto;
+  max-height: calc(100vh - 190px);
+  margin-bottom: 0px;
+}
+
+.panel ul.list-group::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #DDD;
+}
+
+.panel ul.list-group::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 5px;
+  background-color: #DDD;
+}
+
+.panel ul.list-group::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #AAA;
+}
+
+.newTaskContainer {
+  background-color: #ecf0f1;
+  border-radius: 4px;
+}
+
 .newTaskContainer .newTask {
   padding: 10px;
 }
 
 .newTaskContainer .newTaskPlaceholder {
   padding: 10px;
+  -webkit-transition: 150ms;
+  transition: 150ms;
 }
 
 .newTaskContainer .newTaskPlaceholder:hover {
@@ -168,6 +232,46 @@
 
 .newTaskContainer .newTask_remove:hover {
   color: initial;
+}
+
+#board {
+  position: relative;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
+#board .row {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+#board .row::-webkit-scrollbar-track {
+  border-radius: 5px;
+  width: 110%;
+  margin-left: 7px;
+}
+
+#board .row::-webkit-scrollbar {
+  width: 13px;
+  height: 13px;
+  border-radius: 5px;
+  background-color: #DDD;
+}
+
+#board .row::-webkit-scrollbar-thumb {
+  margin-left: 16px;
+  border-radius: 10px;
+  background-color: #AAA;
+}
+
+#board .row .task-list, #board .row .newList {
+  display: inline-block;
 }
 
 .ghost-task {
@@ -247,6 +351,7 @@
 .modal-content .actions {
   width: 100%;
   margin-bottom: 15px;
+  display: initial;
 }
 
 .modal-content .actions .btn {
@@ -263,6 +368,11 @@
 
 .modal-content .right a {
   font-weight: initial;
+}
+
+.modal-content .row {
+  white-space: nowrap;
+  overflow-x: initial;
 }
 
 .close {
