@@ -1,33 +1,31 @@
 <template>
-    <ul class="list-group">
-        <draggable 
-                :list="list" 
-                :options="{
-                    element:'li', 
-                    group:'tasks',
-                    sort:true,
-                    ghostClass: 'ghost-task',
-                    animation:150
-                }" 
-                style="min-height:25px"
-                @change="movedTask($event)"
-        > 
-            <li class="task" 
-                v-for="task in list" 
-                @click="openTask(task)"
-            >
-                <p class="task-title">
-                    {{ task.body }}
-                    <span class="task-tags">
-                        <span class="label label-default"><i class="glyphicon glyphicon-check"></i> 5/7</span>
-                        <i class="glyphicon glyphicon-align-left"></i>
-                        
-                    </span>
-                </p>
-                <span class="glyphicon glyphicon-pencil task-edit" aria-hidden="true"></span>
-            </li>
-        </draggable>
-    </ul>
+    <draggable 
+            :list="list" 
+            :options="{
+                element:'li', 
+                group:'tasks',
+                sort:true,
+                ghostClass: 'ghost-task',
+                animation:150
+            }" 
+            style="min-height:25px"
+            @change="movedTask($event)"
+    > 
+        <li class="task" 
+            v-for="task in list" 
+            @click="openTask(task)"
+        >
+            <p class="task-title">
+                {{ task.body }}
+                <span class="task-tags">
+                    <span class="label label-default"><i class="glyphicon glyphicon-check"></i> 5/7</span>
+                    <i class="glyphicon glyphicon-align-left"></i>
+                    
+                </span>
+            </p>
+            <span class="glyphicon glyphicon-pencil task-edit" aria-hidden="true"></span>
+        </li>
+    </draggable>
 </template>
 
 <script>

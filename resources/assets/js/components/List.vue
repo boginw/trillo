@@ -21,8 +21,20 @@
 
                             <span class="glyphicon glyphicon-option-horizontal list-title-edit" aria-hidden="true"></span>
                         </div>
-                        <tasks :list="list.tasks" :index="idx" :id="list.id"></tasks>
-
+                        <ul class="list-group" ref="listOfTasks">
+                        	<tasks :list="list.tasks" :index="idx" :id="list.id"></tasks>
+						
+							<div class="task" v-show="list.newTask">
+	                            <div class="textareaContainer">
+	                                <textarea  
+	                                    ref="newTaskInput"
+	                                    @keyup.enter="submitTask(list,idx)"
+	                                    @keyup="autoHeight($event.currentTarget)"
+	                                    v-model="tempTask"
+	                                ></textarea>
+	                            </div>  
+	                        </div>
+						</ul>
 
                     </div>
                     <div class="newTaskContainer">
@@ -30,20 +42,20 @@
                             @blur="cancelNewTask(list)"
                             v-show="list.newTask"
                         >
-                            <div class="task">
+                            <!--<div class="task">
                                 <div class="textareaContainer">
                                     <textarea  
                                         ref="newTaskInput"
-                                        @keyup.enter="submitTask(list)"
+                                        @keyup.enter="submitTask(list,idx)"
                                         @keyup="autoHeight($event.currentTarget)"
                                         v-model="tempTask"
                                     ></textarea>
                                 </div>  
-                            </div>
+                            </div>-->
 
                             <div class="btn-group" role="group" aria-label="...">
                                 <button type="button" class="btn btn-success"
-                                    @click="submitTask(list)"
+                                    @click="submitTask(list,idx)"
                                 >
                                     Add
                                 </button>
@@ -152,9 +164,16 @@
 	        		this.$refs['newTaskInput'][idx].focus();
 	        		this.$refs['newTaskInput'][idx].select();
 	            	this.autoHeight(this.$refs['newTaskInput'][idx]);
+
+	            	//scroll to bottom when new task
+	            	this.scrollToBottom(idx);
 	        	},1);
 			},
-			submitTask(list){
+			scrollToBottom(idx){
+				var listOfTasksToScroll = this.$refs['listOfTasks'][idx];
+	            listOfTasksToScroll.scrollTop = listOfTasksToScroll.scrollHeight;
+			},
+			submitTask(list,idx){
 				this.tempTask = this.tempTask.trim();
 
 				var body = this.tempTask;
@@ -172,7 +191,10 @@
 
 					this.$http.put('api/tasks', {body: body, task_list_id: list.id}).then((ret) => {
 						list.tasks[list.tasks.length-1].id = ret.body;
+						this.scrollToBottom(idx);
 					});
+
+					this.tempTask = "";
 				}
 			}
 		}
