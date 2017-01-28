@@ -1,6 +1,7 @@
-Vue.component('modal', require('./components/Modal.vue'));
-Vue.component('list',  require('./components/List.vue'));
-Vue.component('Tasks', require('./components/Tasks.vue'));
+Vue.component('modal',        require('./components/Modal.vue'));
+Vue.component('list',         require('./components/List.vue'));
+Vue.component('Tasks',        require('./components/Tasks.vue'));
+Vue.component('InlineDialog', require('./components/InlineDialog.vue'));
 
 Vue.component('boards', {
 	template: '#boards-template',

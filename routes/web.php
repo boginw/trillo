@@ -43,6 +43,12 @@ Route::patch('/api/tasks/{id}/rename', function($id){
             ->update(['body' => Request::input('body')]) ? "true" : "false";
 });
 
+Route::patch('/api/tasks/{id}/description', function($id){
+	return !!DB::table('tasks')
+            ->where('id', $id)
+            ->update(['description' => Request::input('description')]) ? "true" : "false";
+});
+
 
 Route::get('/', function () {
 

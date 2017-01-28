@@ -37,22 +37,23 @@
 						</ul>
 
                     </div>
-                    <div class="newTaskContainer">
+                    <InlineDialog 
+                    	:shouldShow="list.newTask"
+                    	:idx="idx"
+                    	@dialogSubmit="submitTask"
+						@dialogCancel="cancelNewTask"
+						@dialogShow="newTask"
+                    >
+                        <span slot="submit_text">Save</span>
+                        <span slot="idle_text">Add new task...</span>
+                    </InlineDialog>
+
+
+                    <!--<div class="newTaskContainer">
                         <div class="newTask"
                             @blur="cancelNewTask(list)"
                             v-show="list.newTask"
                         >
-                            <!--<div class="task">
-                                <div class="textareaContainer">
-                                    <textarea  
-                                        ref="newTaskInput"
-                                        @keyup.enter="submitTask(list,idx)"
-                                        @keyup="autoHeight($event.currentTarget)"
-                                        v-model="tempTask"
-                                    ></textarea>
-                                </div>  
-                            </div>-->
-
                             <div class="btn-group" role="group" aria-label="...">
                                 <button type="button" class="btn btn-success"
                                     @click="submitTask(list,idx)"
@@ -71,7 +72,7 @@
                         >
                             Add new task...
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
 
@@ -105,6 +106,7 @@
             Event.$on('esc_pressed', function(){
 				for (var i = 0; i < vm.lists.length; i++) {
 					vm.lists[i].newTask = false;
+					vm.lists[i].edit    = false;
 				}
 			});
 		},
@@ -161,10 +163,11 @@
 				e.preventDefault();
 				e.target.blur();
 			},
-			cancelNewTask(list){
-				list.newTask = false;
+			cancelNewTask(idx){
+				this.lists[idx].newTask = false;
 			},
-			newTask(idx,list){
+			newTask(idx){
+				var list = this.lists[idx];
 				list.newTask = true;
 
 				// Focus input field
@@ -181,9 +184,10 @@
 				var listOfTasksToScroll = this.$refs['listOfTasks'][idx];
 	            listOfTasksToScroll.scrollTop = listOfTasksToScroll.scrollHeight;
 			},
-			submitTask(list,idx){
+			submitTask(idx){
 				this.tempTask = this.tempTask.trim();
-
+				var list = idx;
+				console.log(idx);
 				var body = this.tempTask;
 
 				if(body != ""){
@@ -200,7 +204,7 @@
 
 					this.$http.put('api/tasks', {body: body, task_list_id: list.id}).then((ret) => {
 						list.tasks[list.tasks.length-1].id = ret.body;
-						this.scrollToBottom(idx);
+						this.scrollToBottom(this.lists.indexOf(idx));
 					});
 
 					this.tempTask = "";
