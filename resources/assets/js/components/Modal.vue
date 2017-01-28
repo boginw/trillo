@@ -1,6 +1,6 @@
 <template>
     <!-- The Modal -->
-    <div class="task_modal" v-show="show" @keyup:esc="closeModal()">
+    <div class="task_modal" v-show="show">
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close" @click="closeModal()">&times;</span>
@@ -20,13 +20,13 @@
                 <div class="textareaContainer"
                     v-show="editTitle"
                 >
-                    <!--<textarea  
+                    <textarea  
                         ref="editTitleInput"
                         @keyup="autoHeight($event.currentTarget)"
                         @blur="updateTitle(list)"
-                        @keyup.enter="blurTextarea($event)"
+                        @keyup.enter="updateTitle()"
                         v-model="openTask.body"
-                    ></textarea>-->
+                    ></textarea>
                 </div>
 
                 <p>In list <a href="#">{{ taskList.title }}</a></p>
@@ -102,8 +102,15 @@
 		created(){
 			var vm = this;
 			Event.$on('modal_task', function(task, taskList){
-				vm.openModal(task,taskList);
+                vm.openModal(task,taskList);
+            });
+
+            // Close modal on escape pressed;
+            Event.$on('esc_pressed', function(){
+				vm.closeModal();
 			});
+
+
 		},
         computed: {
             compiledMarkdown() {
@@ -123,9 +130,26 @@
 			closeModal(){
 				this.show = false;
 			},
-			toggleEditTitle(){
+            updateTitle(){
+                this.openTask.body = this.openTask.body.trim().replace("\n","");
+                this.editTitle = false;
 
-			}
+                this.$http.patch('api/tasks/'+this.openTask.id+'/rename', {body: this.openTask.body}).then((ret) => {
+                });
+            },
+            toggleEditTitle(){
+                this.editTitle = true;
+
+                // Focus input field
+                setTimeout(()=>{
+                    this.$refs['editTitleInput'].focus();
+                    this.$refs['editTitleInput'].select();
+                    window.autoHeight(this.$refs['editTitleInput'][0]);
+                },1);
+			},
+            autoHeight(o){
+                window.autoHeight(o);
+            }
 		}
     });
 </script>

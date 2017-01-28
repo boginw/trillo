@@ -340,13 +340,35 @@
   font-size: 16px;
 }
 
-.modal-content .modal_title .title {
+.modal-content .textareaContainer {
+  margin: 0px 25px 0px 25px;
+  background-color: #FFF;
+}
+
+.modal-content .modal_title .title, .modal-content .modal_title textarea {
   font-weight: 700;
   font-size: 16px;
 }
 
+.modal-content .modal_title textarea {
+  background-color: #dedede;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  overflow: hidden;
+  outline: none;
+  border: 0 none #FFF;
+  resize: none;
+  border-radius: 5px;
+}
+
+.modal-content .modal_title textarea:active {
+  outline: none;
+  border: 0 none #FFF;
+}
+
 .modal-content .modal_title p {
-  margin: 0px 0px 0px 25px;
+  margin: 0px 25px 0px 25px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

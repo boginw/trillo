@@ -320,13 +320,33 @@ $default-animation: 150ms;
         font-size: 16px;
     }
 
-    & .modal_title .title{
+    & .textareaContainer{
+        margin: 0px 25px 0px 25px;
+        background-color: #FFF;
+    }
+    & .modal_title .title, & .modal_title textarea{
         font-weight: 700;
         font-size: 16px;
     }
 
+    & .modal_title textarea{
+        background-color: #dedede;
+        margin: 0px;
+        padding: 0px;
+        width:100%;
+        overflow: hidden;
+        outline:none;
+        border: 0 none #FFF;
+        resize: none;
+        border-radius: 5px;
+        &:active{
+            outline:none;
+            border: 0 none #FFF;
+        }
+    }
+
     & .modal_title p{
-        margin: 0px 0px 0px 25px;
+        margin: 0px 25px 0px 25px;
         user-select: none;
     }
 

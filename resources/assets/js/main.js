@@ -26,6 +26,19 @@ let Event = new Vue({});
 window.Event = Event;
 
 let app = new Vue({
-	el: "#board"
+	el: "#board",
+	created: function(){
+		window.addEventListener('keyup', function(e){
+			if(e.keyCode == 27){
+				Event.$emit("esc_pressed");
+			}
+		},false);
+	}
 });
 
+window.autoHeight = function(o){
+	if(o != undefined && o.style != undefined){
+		o.style.height = "1px";
+    	o.style.height = (o.scrollHeight)+"px";
+	}
+}

@@ -97,7 +97,16 @@
 			}
 		},
 		created: function(){
+			var vm = this;
+			
 			this.fetchTaskLists();
+
+			// Close newtask on escape pressed
+            Event.$on('esc_pressed', function(){
+				for (var i = 0; i < vm.lists.length; i++) {
+					vm.lists[i].newTask = false;
+				}
+			});
 		},
 		methods: {
 			fetchTaskLists: function(){
@@ -130,8 +139,7 @@
 	        	this.tempEdit = list.title;
 			},
 			autoHeight(o){
-				o.style.height = "1px";
-			    o.style.height = (o.scrollHeight)+"px";
+				window.autoHeight(o);
 			},
 			updateTitle(list){
 				list.edit = false;
