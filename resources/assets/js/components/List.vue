@@ -186,7 +186,8 @@
 						created_at: "",
 						task_list_id: list.id,
 						updated_at: "",
-						id: 0
+						id: 0,
+						description: "# Hello"
 					});
 
 					this.$http.put('api/tasks', {body: body, task_list_id: list.id}).then((ret) => {

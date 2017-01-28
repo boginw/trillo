@@ -55,6 +55,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.js"></script>
         <script src="//cdn.jsdelivr.net/sortable/latest/Sortable.min.js"></script>
         <script type="text/javascript" src="/js/vuedraggable.js"></script>
+        <script type="text/javascript" src="/js/marked.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
     </body>
 </html>

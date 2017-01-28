@@ -28,3 +28,4 @@ window.Event = Event;
 let app = new Vue({
 	el: "#board"
 });
+

@@ -3,6 +3,7 @@
   position: relative;
   overflow: hidden;
   word-wrap: break-word;
+  white-space: initial;
 }
 
 .list-title p, .list-title .textareaContainer {
@@ -181,7 +182,7 @@
 
 .panel ul.list-group {
   overflow-y: auto;
-  max-height: calc(100vh - 190px);
+  max-height: calc(100vh - 195px);
   margin-bottom: 0px;
 }
 
@@ -325,6 +326,10 @@
   width: 80%;
   /* Could be more or less, depending on screen size */
   max-width: 730px;
+}
+
+.modal-content p {
+  white-space: initial;
 }
 
 .modal-content .modal_icon {

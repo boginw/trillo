@@ -17,17 +17,17 @@
                 	{{ openTask.body }}
                 </p>
 
-                <!--<div class="textareaContainer"
-                    v-show="list.edit"
+                <div class="textareaContainer"
+                    v-show="editTitle"
                 >
-                    <textarea  
+                    <!--<textarea  
                         ref="editTitleInput"
                         @keyup="autoHeight($event.currentTarget)"
                         @blur="updateTitle(list)"
                         @keyup.enter="blurTextarea($event)"
-                        v-model="list.title"
-                    ></textarea>
-                </div>-->
+                        v-model="openTask.body"
+                    ></textarea>-->
+                </div>
 
                 <p>In list <a href="#">{{ taskList.title }}</a></p>
             </div>
@@ -35,9 +35,12 @@
             <div class="row">
                 <div class="col-sm-12 col-md-9 left">
                     <div class="content">
-                        <p><br />This should be description</p>
+                        <p v-html="compiledMarkdown"></p>
                     </div>
                 </div>
+
+
+
                 <div class="col-sm-12 col-md-3 right">
                     <p>Add</p>
                     <div class="btn-group-vertical actions" role="group" aria-label="...">
@@ -102,6 +105,12 @@
 				vm.openModal(task,taskList);
 			});
 		},
+        computed: {
+            compiledMarkdown() {
+                return this.openTask && this.openTask.description ?
+                    marked(this.openTask.description, { sanitize: true }): 'No description';
+            }
+        },
 		methods: {
 			fetchTaskInfo(){
 

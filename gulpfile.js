@@ -19,6 +19,7 @@ elixir(mix => {
        .webpack('main.js')
        .copy('./node_modules/bootstrap-sass/assets/fonts/bootstrap/*','public/fonts/')
        .copy('./node_modules/vuedraggable/dist/vuedraggable.js','public/js/vuedraggable.js')
+       .copy('./node_modules/marked/lib/marked.js','public/js/marked.js')
        .browserSync({
        		proxy : 'trillo.test',
        		files : [
