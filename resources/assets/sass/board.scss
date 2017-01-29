@@ -78,16 +78,22 @@ $default-animation: 150ms;
     cursor:pointer; 
     max-width: 300px;
     width: 100%;
-    & .task-list{
-        background-color: rgba(0,0,0,.12);
+    & .task-list, & .newTaskContainer{
+        background-color: rgba(0,0,0,.06);
         transition: $default-animation;
-        & .panel-body{
+        & .panel-body, & .newTaskPlaceholder{
             padding: $default-padding;
             color: #DDD;
+
+            &:hover{
+                background-color: initial;
+                text-decoration: initial;
+                color: #DDD;
+            }
         }
 
         &:hover{
-            background-color: rgba(0,0,0,.3);
+            background-color: rgba(0,0,0,.15);
         }
     }
 }
