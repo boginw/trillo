@@ -21,7 +21,7 @@ elixir(mix => {
        .copy('./node_modules/vuedraggable/dist/vuedraggable.js','public/js/vuedraggable.js')
        .copy('./node_modules/marked/lib/marked.js','public/js/marked.js')
        .browserSync({
-       		proxy : 'trillo.test',
+       		proxy : 'trillo.local',
        		files : [
        			'public/css/board.css',
        			'public/index.html',
