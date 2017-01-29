@@ -28,7 +28,7 @@ $factory->define(App\Task::class, function (Faker\Generator $faker) {
     return [
         'body'         => $faker->sentence,
         'task_list_id' => rand(1,4),
-        'description'  => $faker->paragraph
+        'description'  => !!rand(0,1) ? $faker->paragraph : ""
     ];
 });
 

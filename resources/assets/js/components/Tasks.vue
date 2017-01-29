@@ -18,8 +18,8 @@
             <p class="task-title">
                 {{ task.body }}
                 <span class="task-tags">
-                    <span class="label label-default"><i class="glyphicon glyphicon-check"></i> 5/7</span>
-                    <i class="glyphicon glyphicon-align-left"></i>
+                    <span class="label label-default" v-if="task.description.trim()"><i class="glyphicon glyphicon-check"></i> 5/7</span>
+                    <i class="glyphicon glyphicon-align-left" v-if="task.description.trim()"></i>
                     
                 </span>
             </p>
@@ -32,6 +32,12 @@
     export default({
         props: ["list","id","index"],
         methods: {
+            hasDescription(task){
+                return 
+                    !!task && 
+                    !!task.description &&
+                    task.description.trim() != "";
+            },
             deleteTask: function(task){
                 this.list.splice(this.list.indexOf(task),1);
             },
@@ -50,6 +56,14 @@
             },
             openTask(task){
                 Event.$emit("modal_task", task, this.$parent._data.lists[this.index]);
+            }
+        },
+        computed:{
+            compHasDescription(task){
+                return 
+                    !!task && 
+                    !!task.description &&
+                    task.description.trim() != "";
             }
         }
     });

@@ -34,7 +34,7 @@
 
             <div class="row">
                 <div class="col-sm-12 col-md-9 left">
-                    <div class="content" v-if="true">
+                    <div class="content">
                         <div class="description">
                             <div id="viewDescription">
                                 <p class="grayText">
@@ -72,11 +72,15 @@
                                 <span slot="idle_text"></span>
                             </InlineDialog>
                         </div>
+                    </div>
 
+                    <div class="modal_icon">
+                        <span class="glyphicon glyphicon-comment"></span>
                     </div>
-                    <div class="content" v-else>
-                        <a href="#">Edit the description</a>
-                    </div>
+
+                    <p  class="title">
+                        Add Comment
+                    </p>
                 </div>
 
                 <div class="col-sm-12 col-md-3 right">
@@ -154,6 +158,11 @@
             margin: 0px;
             float: left;
             padding: 1px;
+            font-size: 16px;
+        }
+
+        & .title{
+            font-weight: 700;
             font-size: 16px;
         }
 
