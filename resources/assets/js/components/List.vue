@@ -47,43 +47,23 @@
                         <span slot="submit_text">Save</span>
                         <span slot="idle_text">Add new task...</span>
                     </InlineDialog>
-
-
-                    <!--<div class="newTaskContainer">
-                        <div class="newTask"
-                            @blur="cancelNewTask(list)"
-                            v-show="list.newTask"
-                        >
-                            <div class="btn-group" role="group" aria-label="...">
-                                <button type="button" class="btn btn-success"
-                                    @click="submitTask(list,idx)"
-                                >
-                                    Add
-                                </button>
-                            </div>
-                            <span class="glyphicon glyphicon-remove newTask_remove" aria-hidden="true"
-                                @click="cancelNewTask(list)"
-                            ></span>
-                        </div>
-
-                        <div class="newTaskPlaceholder"
-                            v-show="!list.newTask"
-                            @click="newTask(idx,list)"
-                        >
-                            Add new task...
-                        </div>
-                    </div>-->
                 </div>
             </div>
 
-        <div class="newList">
-        	<div class="task-list">
-        		<div class="panel-body">
-        			Add new list
-        			
-        		</div>
-        	</div>
-        </div>
+			<div class="newList">
+				<div class="task-list">
+					<!--<div class="panel-body">
+						Add new list
+					</div>-->
+
+					<InlineDialog 
+                    	:shouldShow="false"
+                    >
+                        <span slot="submit_text">Save</span>
+                        <span slot="idle_text">Add new list</span>
+                    </InlineDialog>
+				</div>
+			</div>
     </div>
 </template>
 
