@@ -2,4 +2,4 @@
 Trillo is a collaboration thing that organizes your things into things
 
 ## Preview
-<img src="http://image.prntscr.com/image/a8b69e5dcf4a4771bf37b2ab738be241.png" width="100%" />
+<img src="http://image.prntscr.com/image/b2a2cbabff91434385b2b598cc90e571.png" width="100%" />
