@@ -2,7 +2,7 @@
     <!-- The Modal -->
     <div class="task_modal" v-show="show">
         <!-- Modal content -->
-        <div class="modal-content">
+        <div class="modal-content" v-click-outside="closeModalClick">
             <span class="close" @click="closeModal()">&times;</span>
 
             <div class="modal_title">
@@ -258,7 +258,8 @@
 				taskList: false,
                 editTitle: false,
 				editDescription: false,
-                tempDescription: ""
+                tempDescription: "",
+                first: true
 			};
 		},
 		created(){
@@ -296,7 +297,15 @@
 			},
 			closeModal(){
 				this.show = false;
-			},
+                this.first = true;
+            },
+            closeModalClick(){
+                if(!this.first){
+                    this.closeModal();
+                }else{
+                    this.first = false;
+                }
+            },
             updateTitle(){
                 this.openTask.body = this.openTask.body.trim().replace("\n","");
                 this.editTitle = false;

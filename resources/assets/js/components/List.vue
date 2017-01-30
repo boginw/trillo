@@ -10,7 +10,8 @@
                             <div class="textareaContainer"
                                 v-show="list.edit"
                             >
-                                <textarea  
+                                <textarea
+                                	v-click-outside="blurTextarea"
                                     ref="editTitleInput"
                                     @keyup="autoHeight($event.currentTarget)"
                                     @blur="updateTitle(list)"
