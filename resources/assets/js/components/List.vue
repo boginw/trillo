@@ -11,7 +11,7 @@
                                 v-show="list.edit"
                             >
                                 <textarea
-                                	v-click-outside="blurTextarea"
+                                	v-click-outside="function(e){if(list.edit){blurTextarea(e)}}"
                                     ref="editTitleInput"
                                     @keyup="autoHeight($event.currentTarget)"
                                     @blur="updateTitle(list)"
@@ -25,7 +25,7 @@
                         <ul class="list-group" ref="listOfTasks">
                         	<tasks :list="list.tasks" :index="idx" :id="list.id"></tasks>
 						
-							<div class="task" v-show="list.newTask">
+							<div class="task" v-show="list.newTask" ref="">
 	                            <div class="textareaContainer">
 	                                <textarea  
 	                                    ref="newTaskInput"
@@ -36,7 +36,6 @@
 	                            </div>  
 	                        </div>
 						</ul>
-
                     </div>
                     <InlineDialog 
                     	:shouldShow="list.newTask"
@@ -44,6 +43,7 @@
                     	@dialogSubmit="submitTask"
 						@dialogCancel="cancelNewTask"
 						@dialogShow="newTask"
+						v-click-outside="function(e){outsideClick(e,idx)}"
                     >
                         <span slot="submit_text">Save</span>
                         <span slot="idle_text">Add new task...</span>
@@ -53,9 +53,15 @@
 
 			<div class="newList">
 				<div class="task-list">
-					<!--<div class="panel-body">
-						Add new list
-					</div>-->
+
+					<div class="list-title">
+                        <div class="textareaContainer"
+                            v-show="false"
+                        >
+                            <textarea
+                            ></textarea>
+                        </div>
+                    </div>
 
 					<InlineDialog 
                     	:shouldShow="false"
@@ -140,12 +146,29 @@
 					});
 				}
 			},
+			outsideClick(e,idx){
+				var el = e.target;
+				var cl = el.className;
+				var ta = el.tagName;
+
+				if(cl == "textareaContainer" || ta == "TEXTAREA"){
+					return;
+				}
+
+				if(this.lists[idx].newTask){
+					this.$refs['newTaskInput'][idx].blur();
+				}
+			},
 			blurTextarea(e){
 				e.preventDefault();
 				e.target.blur();
 			},
+			hideNewTask(idx){
+				this.lists[idx].newTask = false;
+			},
 			cancelNewTask(idx){
 				this.lists[idx].newTask = false;
+				this.tempTask = "";
 			},
 			newTask(idx){
 				var list = this.lists[idx];

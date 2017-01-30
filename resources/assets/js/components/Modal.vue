@@ -1,6 +1,6 @@
 <template>
     <!-- The Modal -->
-    <div class="task_modal" v-show="show">
+    <div class="task_modal" v-if="show">
         <!-- Modal content -->
         <div class="modal-content" v-click-outside="closeModalClick">
             <span class="close" @click="closeModal()">&times;</span>
@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-9 left">
                     <div class="content">
-                        <div class="description">
+                        <div class="description" v-click-outside="function(e){editDescription = false;}">
                             <div id="viewDescription">
                                 <p class="grayText">
                                     Description.
@@ -65,11 +65,13 @@
                             <InlineDialog 
                                 :shouldShow="editDescription"
                                 :showIdle="false"
+                                :showRight="true"
                                 @dialogSubmit="descriptionEdit"
                                 @dialogCancel="cancelDescriptionEdit"
                             >
                                 <span slot="submit_text">Save</span>
                                 <span slot="idle_text"></span>
+                                <span slot="right_text">Formatting help</span>
                             </InlineDialog>
                         </div>
                     </div>

@@ -115,7 +115,7 @@ $default-animation: 150ms;
 	& .task-title{
 	    width: 100%;
 	    padding-right: $list-edit-width;
-	    font-size: 11px;
+	    font-size: 12px;
 	    font-weight: 500;
     	margin-right: $list-edit-width;
         user-select: none;
@@ -234,11 +234,17 @@ $default-animation: 150ms;
     position: relative;
     flex-grow: 1;
     white-space: nowrap;
+
+    & > .row{
+        height: calc(100vh - 91px);
+    }
+
     & .row{
         user-select: none;
         white-space: nowrap;
         overflow-x: auto;
         overflow-y: hidden;
+
 
         &::-webkit-scrollbar-track{
             border-radius: 5px;

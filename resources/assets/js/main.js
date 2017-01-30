@@ -1,3 +1,5 @@
+
+
 Vue.directive('click-outside', {
 	/* Credit to: https://jsfiddle.net/Linusborg/Lx49LaL8/ */
 	bind: function(el, binding, vNode) {
@@ -36,6 +38,7 @@ Vue.component('modal',        require('./components/Modal.vue'));
 Vue.component('list',         require('./components/List.vue'));
 Vue.component('Tasks',        require('./components/Tasks.vue'));
 Vue.component('InlineDialog', require('./components/InlineDialog.vue'));
+Vue.component('DropOver',     require('./components/DropOver.vue'));
 
 Vue.component('boards', {
 	template: '#boards-template',

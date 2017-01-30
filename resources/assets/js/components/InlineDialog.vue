@@ -24,6 +24,15 @@
             <span class="glyphicon glyphicon-remove newTask_remove" aria-hidden="true"
                 @click="$emit('dialogCancel', idx)"
             ></span>
+
+
+
+            <span class="formattingHelp" 
+                v-show="showRight"
+                @click="$emit('dialogRight',idx)"
+            >
+                    <slot name="right_text"></slot>
+            </span>
         </div>
 
         <div class="newTaskPlaceholder"
@@ -37,6 +46,21 @@
 
 <script>
 	export default({
-		props: ['shouldShow', 'idx','showIdle']
+		props: ['shouldShow', 'idx','showIdle','showRight']
 	});	
 </script>
+
+<style lang="sass">
+    .formattingHelp{
+        float: right;
+        padding: 5px;
+        background: #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover{
+            color: black;
+            text-decoration: underline;
+        }
+    }
+</style>

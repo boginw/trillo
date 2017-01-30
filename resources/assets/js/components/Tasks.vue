@@ -17,11 +17,7 @@
         >
             <p class="task-title">
                 {{ task.body }}
-                <span class="task-tags">
-                    <span class="label label-default" v-if="task.description.trim()"><i class="glyphicon glyphicon-check"></i> 5/7</span>
-                    <i class="glyphicon glyphicon-align-left" v-if="task.description.trim()"></i>
-                    
-                </span>
+                <task-tags :task="task"></task-tags>
             </p>
             <span class="glyphicon glyphicon-pencil task-edit" aria-hidden="true"></span>
         </li>
@@ -58,12 +54,21 @@
                 Event.$emit("modal_task", task, this.$parent._data.lists[this.index]);
             }
         },
-        computed:{
-            compHasDescription(task){
-                return 
-                    !!task && 
-                    !!task.description &&
-                    task.description.trim() != "";
+        components:{
+            'task-tags':{
+                template: `
+                    <span class="task-tags">
+                        <span class="label label-default" v-if="compHasDescription"><i class="glyphicon glyphicon-check"></i> 5/7</span>
+                        <i class="glyphicon glyphicon-align-left" v-if="compHasDescription"></i>
+                    </span>`,
+                props: ['task'],
+                computed:{
+                    compHasDescription(){
+                        return !!this.task && 
+                            !!this.task.description &&
+                            this.task.description.trim() != "";
+                    }
+                }
             }
         }
     });
