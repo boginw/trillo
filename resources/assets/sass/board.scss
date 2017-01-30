@@ -74,29 +74,6 @@ $default-animation: 150ms;
     vertical-align: top;
 }
 
-.newList{
-    cursor:pointer; 
-    max-width: 300px;
-    width: 100%;
-    & .task-list, & .newTaskContainer{
-        background-color: rgba(0,0,0,.06);
-        transition: $default-animation;
-        & .panel-body, & .newTaskPlaceholder{
-            padding: $default-padding;
-            color: #DDD;
-
-            &:hover{
-                background-color: initial;
-                text-decoration: initial;
-                color: #DDD;
-            }
-        }
-
-        &:hover{
-            background-color: rgba(0,0,0,.15);
-        }
-    }
-}
 
 .task{
 	padding: 5px;

@@ -70,33 +70,6 @@
   vertical-align: top;
 }
 
-.newList {
-  cursor: pointer;
-  max-width: 300px;
-  width: 100%;
-}
-
-.newList .task-list, .newList .newTaskContainer {
-  background-color: rgba(0, 0, 0, 0.06);
-  -webkit-transition: 150ms;
-  transition: 150ms;
-}
-
-.newList .task-list .panel-body, .newList .task-list .newTaskPlaceholder, .newList .newTaskContainer .panel-body, .newList .newTaskContainer .newTaskPlaceholder {
-  padding: 10px;
-  color: #DDD;
-}
-
-.newList .task-list .panel-body:hover, .newList .task-list .newTaskPlaceholder:hover, .newList .newTaskContainer .panel-body:hover, .newList .newTaskContainer .newTaskPlaceholder:hover {
-  background-color: initial;
-  text-decoration: initial;
-  color: #DDD;
-}
-
-.newList .task-list:hover, .newList .newTaskContainer:hover {
-  background-color: rgba(0, 0, 0, 0.15);
-}
-
 .task {
   padding: 5px;
   position: relative;

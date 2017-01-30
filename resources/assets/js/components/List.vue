@@ -51,28 +51,98 @@
                 </div>
             </div>
 
-			<div class="newList">
-				<div class="task-list">
+			<div class="newList" v-bind:class="{ isActive: newList }"
+				v-click-outside="function(e){if(newList){listNew = false;}}"
+			>
+                <div class="newListBody">
+	                <div class="textareaContainer"
+	                    v-show="newList"
+	                >
+	                    <textarea 
+	                    	v-model="newListTemp"
+                            ref="newListInput"
+                            @keyup="autoHeight($event.currentTarget)"
+                            @keyup.enter="submitNewList($event)"
+	                    ></textarea>
+	                </div>                	
+                </div>
 
-					<div class="list-title">
-                        <div class="textareaContainer"
-                            v-show="false"
-                        >
-                            <textarea
-                            ></textarea>
-                        </div>
-                    </div>
-
-					<InlineDialog 
-                    	:shouldShow="false"
-                    >
-                        <span slot="submit_text">Save</span>
-                        <span slot="idle_text">Add new list</span>
-                    </InlineDialog>
-				</div>
+				<InlineDialog 
+                	:shouldShow="newList"
+                	:idx="true"
+                	@dialogShow="listNew"
+                	@dialogCancel="cancelNewList"
+                	@dialogSubmit="submitNewList($event)"
+                >
+                    <span slot="submit_text">Save</span>
+                    <span slot="idle_text">Add new list</span>
+                </InlineDialog>
 			</div>
     </div>
 </template>
+
+<style lang="sass">
+	
+.newList{
+    cursor:pointer; 
+    max-width: 300px;
+    width: 100%;
+    margin-left: 16px;
+
+	& textarea{
+		outline:none;
+	    border: 0 none #FFF;
+	    resize: none;
+	    width: 100%;
+	    height: 25px;
+	    overflow: hidden;
+	    background-color: #ebeff0;
+	    font-weight: 600;
+	}
+
+    & .newTaskContainer{
+        background-color: rgba(0,0,0,.06);
+        /*transition: $default-animation; */
+
+        & .panel-body, & .newTaskPlaceholder{
+            /*padding: $default-padding;*/
+            color: #DDD;
+
+            &:hover{
+                background-color: initial;
+                text-decoration: initial;
+                color: #DDD;
+            }
+        }
+
+        &:hover{
+            background-color: rgba(0,0,0,.15);
+        }
+    }
+    &.isActive{
+		& .newListBody{
+			padding: 10px 10px 0px 10px;
+		    background-color: #ecf0f1;
+		    border-top-left-radius: 5px;
+		    border-top-right-radius: 5px;
+
+		    & .textareaContainer{
+			    border-radius: 5px;
+			    border: 1px solid #b6b6b6;
+			    padding: 5px;
+			    box-shadow: inset 0 0 6px #dfdfdf;
+		    }
+		}
+		& .newTaskContainer{
+		    background-color: #ecf0f1;
+			border-radius: 0px 0px 5px 5px;
+			&:hover{
+				background-color: #ecf0f1;
+			}
+		}
+    }
+}
+</style>
 
 <script>
 	export default ({
@@ -81,7 +151,9 @@
 			return {
 				lists: [],
 				tempEdit: "",
-				tempTask: ""
+				tempTask: "",
+				newList : false,
+				newListTemp: ""
 			}
 		},
 		created: function(){
@@ -95,6 +167,7 @@
 					vm.lists[i].newTask = false;
 					vm.lists[i].edit    = false;
 				}
+				vm.newList = false;
 			});
 		},
 		methods: {
@@ -113,8 +186,42 @@
 					this.lists = lists.data;
 				});
 			},
+			submitNewList(){
+				this.newListTemp = this.newListTemp.trim();
+
+				if(this.newListTemp){
+					var theNewList = this.lists.push({
+						archived: 0,
+						created_at: null,
+						edit: false,
+						id: 0,
+						newTask: false,
+						tasks:[],
+						title: this.newListTemp,
+						updated_at: null
+					});
+					this.$http.put('api/lists/', {title: this.newListTemp}).then((ret) => {
+						this.lists[theNewList-1].id = ret.body;
+					});
+				}
+				this.cancelNewList();
+
+			},
 			deleteTask: function(task){
 				this.lists.splice(this.lists.indexOf(task),1);
+			},
+			listNew(){
+				setTimeout(()=>{
+					this.$refs['newListInput'].focus();
+					this.$refs['newListInput'].select();	
+				},10);
+				this.newList = true;
+
+				return true;
+			},
+			cancelNewList(){
+				this.newListTemp = "";
+				this.newList = false;
 			},
 			toggleEditTitle: function(idx, list){
 				list.edit = true;

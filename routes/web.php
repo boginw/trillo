@@ -30,6 +30,14 @@ Route::put('/api/tasks', function(){
 	return $id;
 });
 
+Route::put('/api/lists', function(){
+	$id = DB::table('task_lists')
+		->insertGetId([
+				"title" => Request::input("title")
+			]);
+	return $id;
+});
+
 Route::patch('/api/tasks/{id}/move', function($id){
 	return !!DB::table('tasks')
             ->where('id', $id)
